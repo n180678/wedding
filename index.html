@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171411">
+<title>Wedding Memories</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #151311;
+  color: #fff;
+  font-family: Georgia, serif;
+}
+
+header {
+  text-align: center;
+  padding: 65px 20px 45px;
+  background: linear-gradient(180deg, #30251f, #151311);
+}
+
+.tag {
+  color: #d9b995;
+  font: 11px Arial;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(38px, 7vw, 65px);
+  font-weight: normal;
+  margin: 22px 0 12px;
+}
+
+.subtitle {
+  color: #c9bdb1;
+  font: 14px Arial;
+}
+
+main {
+  max-width: 1250px;
+  margin: auto;
+  padding: 30px 18px 60px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  color: #c9bdb1;
+  font: 13px Arial;
+  gap: 12px;
+}
+
+button {
+  background: transparent;
+  color: white;
+  border: 1px solid #9d8064;
+  padding: 11px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #49372a;
+}
+
+.gallery {
+  columns: 3 240px;
+  column-gap: 14px;
+}
+
+.photo {
+  break-inside: avoid;
+  margin-bottom: 14px;
+  overflow: hidden;
+  background: #29231f;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform .4s;
+}
+
+.photo img:hover {
+  transform: scale(1.035);
+}
+
+#status {
+  text-align: center;
+  padding: 35px 10px;
+  color: #c9bdb1;
+  font: 14px Arial;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #9d9185;
+  font: 11px Arial;
+  letter-spacing: 3px;
+}
+
+#viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.96);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#viewer.open {
+  display: flex;
+}
+
+#viewer img {
+  max-width: 95%;
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+#close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 28px;
+  border: none;
+}
+
+@media(max-width:600px) {
+  header {
+    padding: 45px 15px 35px;
+  }
+
+  main {
+    padding: 20px 10px 40px;
+  }
+
+  .gallery {
+    columns: 2 140px;
+    column-gap: 8px;
+  }
+
+  .photo {
+    margin-bottom: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="tag">A day to remember</div>
+  <h1>Wedding Memories</h1>
+  <p class="subtitle">Every picture tells a beautiful story.</p>
+</header>
+
+<main>
+  <div class="info">
+    <span id="count">Loading wedding photos...</span>
+    <button onclick="loadPhotos()">Refresh</button>
+  </div>
+
+  <div id="gallery" class="gallery"></div>
+  <div id="status">Please wait while your memories load...</div>
+</main>
+
+<footer>MADE WITH LOVE · WEDDING MEMORIES</footer>
+
+<div id="viewer" onclick="closeViewer(event)">
+  <button id="close" onclick="closeViewer(event)">×</button>
+  <img id="largePhoto" alt="Wedding photo">
+</div>
+
+<script>
+const OWNER = "n180678";
+const REPOSITORY = "wedding";
+const BRANCH = "main";
+
+const apiURL =
+  `https://api.github.com/repos/${OWNER}/${REPOSITORY}/contents/?ref=${BRANCH}`;
+
+const imageExtensions = /\.(jpg|jpeg|png|webp|gif|avif)$/i;
+
+async function loadPhotos() {
+  const gallery = document.getElementById("gallery");
+  const status = document.getElementById("status");
+  const count = document.getElementById("count");
+
+  gallery.innerHTML = "";
+  status.style.display = "block";
+  status.textContent = "Loading your wedding memories...";
+  count.textContent = "Finding photos...";
+
+  try {
+    const response = await fetch(apiURL);
+
+    if (!response.ok) {
+      throw new Error("Unable to access the public photo folder.");
+    }
+
+    const files = await response.json();
+
+    const photos = files
+      .filter(file =>
+        file.type === "file" &&
+        imageExtensions.test(file.name)
+      )
+      .sort((a, b) =>
+        a.name.localeCompare(b.name, undefined, {numeric:true})
+      );
+
+    if (photos.length === 0) {
+      count.textContent = "0 photos";
+      status.textContent = "No photos found. Upload images to your GitHub repository.";
+      return;
+    }
+
+    count.textContent = `${photos.length} beautiful memories`;
+    status.style.display = "none";
+
+    photos.forEach(photo => {
+      const card = document.createElement("div");
+      card.className = "photo";
+
+      const img = document.createElement("img");
+      img.src = photo.download_url;
+      img.alt = photo.name;
+      img.loading = "lazy";
+
+      img.onclick = () => openViewer(photo.download_url);
+
+      card.appendChild(img);
+      gallery.appendChild(card);
+    });
+
+  } catch (error) {
+    count.textContent = "Gallery unavailable";
+    status.textContent =
+      error.message + " Check that your GitHub repository is public, then refresh.";
+  }
+}
+
+function openViewer(url) {
+  document.getElementById("largePhoto").src = url;
+  document.getElementById("viewer").classList.add("open");
+}
+
+function closeViewer(event) {
+  if (event.target.id === "viewer" ||
+      event.target.id === "close") {
+    document.getElementById("viewer").classList.remove("open");
+  }
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.getElementById("viewer").classList.remove("open");
+  }
+});
+
+loadPhotos();
+</script>
+
+</body>
+</html>
