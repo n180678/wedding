@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#191612"><title>Wedding Memories | HD Gallery</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f3ec;color:#29231d;font-family:Arial,sans-serif}.top{height:5px;background:linear-gradient(90deg,#87653e,#e4cfaa,#87653e)}nav{max-width:1160px;margin:auto;padding:22px 5%;display:flex;justify-content:space-between;align-items:center}.brand{font:12px Georgia,serif;letter-spacing:.22em;text-transform:uppercase}nav a{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#85796b;text-decoration:none}.hero{min-height:440px;display:grid;place-items:center;text-align:center;color:#fff;background:linear-gradient(#15120f85,#15120f85),url('https://raw.githubusercontent.com/n180678/wedding/main/SRK_3346.JPG') center 38%/cover;padding:50px 20px;position:relative}.hero:after{content:"";position:absolute;inset:15px;border:1px solid #ffffff70}.hero div{position:relative;z-index:1}.eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#e8d5b5}h1{font:clamp(48px,9vw,88px) Georgia,serif;font-weight:400;margin:20px 0}.hero p{font:italic 17px Georgia,serif}.intro{text-align:center;padding:58px 20px 34px}.intro h2{font:36px Georgia,serif;font-weight:400;margin:13px}.intro p{font:italic 14px Georgia,serif;color:#83796f}main{max-width:1160px;margin:auto;padding:0 5% 70px}.head{display:flex;justify-content:space-between;align-items:end;margin:15px 0 20px;gap:15px}.head h2{font:32px Georgia,serif;font-weight:400;margin:0}.head span{font-size:10px;letter-spacing:.15em;color:#aa8758}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.photo{background:#fff;box-shadow:0 8px 28px #2b21100c}.photo img{display:block;width:100%;height:auto;max-height:760px;object-fit:contain;background:#e9e3d9}.photo-foot{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;font-size:11px;color:#756a5e;gap:10px}.photo-foot a{color:#9a7548;text-decoration:none}.download{margin:28px 0 0;background:#211d19;color:#fff;padding:27px;text-align:center}.download h3{font:25px Georgia,serif;font-weight:400;margin:0 0 9px}.download p{font-size:12px;color:#cfc4b7;line-height:1.7}button{border:1px solid #b99a6c;background:#b99a6c;color:#1d1915;padding:13px 18px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer}button:disabled{opacity:.6;cursor:wait}#status{font-size:11px;color:#d7c5a7;min-height:16px}footer{text-align:center;padding:32px;color:#8b8177;font:italic 14px Georgia,serif;border-top:1px solid #e8dfd3}@media(max-width:650px){nav{padding:18px 5%}.hero{min-height:390px}.grid{grid-template-columns:1fr;gap:12px}main{padding-left:4%;padding-right:4%}.head{align-items:start;flex-direction:column}.photo img{max-height:none}}
+</style></head><body><div class="top"></div>
+<nav><div class="brand">The Wedding Edit</div><a href="#gallery">View photographs</a></nav>
+<header class="hero"><div><div class="eyebrow">A collection of special moments</div><h1>Wedding Memories</h1><p>Beautiful moments, kept forever.</p></div></header>
+<section class="intro"><div class="eyebrow">The celebration</div><h2>Every moment, a memory.</h2><p>Browse and download the original photographs below.</p></section>
+<main id="gallery"><div class="head"><h2>Photo Gallery</h2><span>4 ORIGINAL PHOTOGRAPHS</span></div>
+<div class="grid"><article class="photo"><img src="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3346.JPG" alt="SRK_3346.JPG" loading="lazy"><div class="photo-foot"><span>SRK_3346.JPG</span><a href="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3346.JPG" target="_blank" rel="noopener">Open original ↗</a></div></article>
+<article class="photo"><img src="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3350.JPG" alt="SRK_3350.JPG" loading="lazy"><div class="photo-foot"><span>SRK_3350.JPG</span><a href="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3350.JPG" target="_blank" rel="noopener">Open original ↗</a></div></article>
+<article class="photo"><img src="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3351.JPG" alt="SRK_3351.JPG" loading="lazy"><div class="photo-foot"><span>SRK_3351.JPG</span><a href="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3351.JPG" target="_blank" rel="noopener">Open original ↗</a></div></article>
+<article class="photo"><img src="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3352.JPG" alt="SRK_3352.JPG" loading="lazy"><div class="photo-foot"><span>SRK_3352.JPG</span><a href="https://raw.githubusercontent.com/n180678/wedding/main/SRK_3352.JPG" target="_blank" rel="noopener">Open original ↗</a></div></article></div>
+<section class="download"><h3>Keep every memory</h3><p>Download all four original JPG files together. No resizing or image recompression is applied by this gallery.</p><button id="zip">Download all original photos · ZIP</button><div id="status"></div></section></main>
+<footer>Made with love · The Wedding Edit</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const photos=[{name:"SRK_3346.JPG",url:"https://raw.githubusercontent.com/n180678/wedding/main/SRK_3346.JPG"},
+{name:"SRK_3350.JPG",url:"https://raw.githubusercontent.com/n180678/wedding/main/SRK_3350.JPG"},
+{name:"SRK_3351.JPG",url:"https://raw.githubusercontent.com/n180678/wedding/main/SRK_3351.JPG"},
+{name:"SRK_3352.JPG",url:"https://raw.githubusercontent.com/n180678/wedding/main/SRK_3352.JPG"}];
+document.getElementById('zip').addEventListener('click',async()=>{
+ const btn=document.getElementById('zip'),status=document.getElementById('status');btn.disabled=true;btn.textContent='Preparing original photos…';
+ try{
+  if(!window.JSZip)throw new Error('ZIP library unavailable. Please refresh with internet access.');
+  const zip=new JSZip(),folder=zip.folder('Wedding-Original-HD');
+  for(let i=0;i<photos.length;i++){
+   status.textContent='Fetching '+photos[i].name+' ('+(i+1)+'/'+photos.length+')…';
+   const response=await fetch(photos[i].url);if(!response.ok)throw new Error('Could not fetch '+photos[i].name);
+   folder.file(photos[i].name,await response.blob());
+  }
+  status.textContent='Building ZIP…';
+  const blob=await zip.generateAsync({type:'blob',compression:'STORE'});
+  const a=document.createElement('a'),objectUrl=URL.createObjectURL(blob);a.href=objectUrl;a.download='Wedding-Original-HD.zip';a.click();setTimeout(()=>URL.revokeObjectURL(objectUrl),5000);status.textContent='Your original-quality ZIP download has started.';
+ }catch(err){status.textContent=err.message+' You can still open and save each original photo using its link.';}
+ finally{btn.disabled=false;btn.textContent='Download all original photos · ZIP';}
+});
+</script></body></html>
